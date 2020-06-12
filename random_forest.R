@@ -54,6 +54,8 @@ for (i in 1:3)
   # Assess the performance of classifier for class[i]
   pred <- prediction(prediction_for_roc_curve[,i],true_values)
   perf <- performance(pred, "tpr", "fpr")
+  
+  png(file="Random_Forest_ROC_Curve.png")
   if (i==1)
   {
     plot(perf,main="ROC Curve",col=pretty_colours[i]) 
@@ -62,6 +64,8 @@ for (i in 1:3)
   {
     plot(perf,main="ROC Curve",col=pretty_colours[i],add=TRUE) 
   }
+  dev.off()
+  
   # Calculate the AUC and print it to screen
   auc.perf <- performance(pred, measure = "auc")
   print(auc.perf@y.values)
